@@ -44,6 +44,7 @@
 </template>
 <script>
 import ComNavmenu from './navMenu';
+import * as loginService from '@/api/login';
 export default {
   data() {
     return {
@@ -54,7 +55,8 @@ export default {
     this.addTab(this.$route);
   },
   components: {
-    'com-navmenu': ComNavmenu
+    'com-navmenu': ComNavmenu,
+    loginService
   },
   watch: {
     // 监听路由变化,加入到tabs中
@@ -89,11 +91,14 @@ export default {
         this.$router.push('/');
       }
     },
-    handleCommand(cmd) {
+    async handleCommand(cmd) {
       if (cmd === 'logout') {
-        window.localStorage.removeItem('token');
-        window.localStorage.removeItem('user');
-        this.$router.push('/login');
+        const res = await loginService.logout();
+        if (res.code === 20000) {
+          window.localStorage.removeItem('token');
+          window.localStorage.removeItem('user');
+          this.$router.push('/login');
+        }
       }
     }
   }

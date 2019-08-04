@@ -36,6 +36,16 @@ const routes = [
         component: (resolve) => require(['../pages/article/index.vue'], resolve)
       },
       {
+        path: '/richText/richTextForm',
+        name: '富文本编辑器',
+        component: (resolve) => require(['../pages/richText/richTextForm.vue'], resolve)
+      },
+      {
+        path: '/workpoint/RecordWorkPoint',
+        name: '记工时',
+        component: (resolve) => require(['../pages/workpoint/RecordWorkPoint.vue'], resolve)
+      },
+      {
         path: '/article/add',
         name: '添加文章',
         component: (resolve) => require(['../pages/article/add.vue'], resolve)

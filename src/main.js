@@ -7,6 +7,20 @@ import Request from './request/index';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
+import VueQuillEditor from 'vue-quill-editor';
+
+// require styles
+import 'quill/dist/quill.core.css';
+import 'quill/dist/quill.snow.css';
+import 'quill/dist/quill.bubble.css';
+
+import FullCalendar from 'vue-fullcalendar';
+Vue.use(FullCalendar);
+
+Vue.use(VueQuillEditor, {
+  placeholder: '请输入内容'
+});
+
 Vue.config.productionTip = false;
 Vue.prototype.$request = Request;
 Vue.prototype.$bus = new Vue();

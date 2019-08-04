@@ -2,7 +2,7 @@
   <div>
     <div class="nav-header">
       <div class="nav-profile">
-        <img class="avatar" src="http://img.duoziwang.com/2018/17/05291132323624.jpg"/>
+        <img class="avatar" src="http://img3.imgtn.bdimg.com/it/u=400062461,2874561526&fm=26&gp=0.jpg"/>
         <p class="account">{{account}}</p>
         <p class="group">{{group}}</p>
       </div>
@@ -43,6 +43,28 @@ export default {
             {
               name: '文章列表',
               path: '/article/index'
+            }
+          ]
+        },
+        {
+          index: 'richText',
+          icon: 'el-icon-document',
+          name: '富文本编辑器',
+          subMenus: [
+            {
+              name: '富文本编辑器',
+              path: '/richText/richTextForm'
+            }
+          ]
+        },
+        {
+          index: 'workpoint',
+          icon: 'el-icon-document',
+          name: '记工时',
+          subMenus: [
+            {
+              name: '记工时',
+              path: '/workpoint/RecordWorkPoint'
             }
           ]
         },
