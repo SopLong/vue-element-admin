@@ -16,26 +16,3 @@ export function logout() {
     method: 'get'
   });
 }
-
-// 保存工作时长
-export function saveWorkPoint(day, duration) {
-  return request({
-    url: '/workPoint/saveWorkPoint',
-    method: 'post',
-    data: {
-      dateTime: day,
-      allHours: duration
-    }
-  });
-}
-
-// 生成工资单
-export function generarePayroll(month) {
-  return request({
-    url: '/workPoint/generarePayroll',
-    method: 'get',
-    params: {
-      currentMonth: month
-    }
-  });
-}

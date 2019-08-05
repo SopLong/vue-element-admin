@@ -15,6 +15,10 @@ import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
 
 import FullCalendar from 'vue-fullcalendar';
+
+import moment from 'moment';// 导入文件
+
+Vue.prototype.$moment = moment;// 赋值使用
 Vue.use(FullCalendar);
 
 Vue.use(VueQuillEditor, {
