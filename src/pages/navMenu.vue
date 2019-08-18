@@ -43,6 +43,10 @@ export default {
             {
               name: '文章列表',
               path: '/article/index'
+            },
+            {
+              name: '添加博客',
+              path: '/article/add'
             }
           ]
         },
@@ -74,6 +78,10 @@ export default {
           name: '系统设置',
           subMenus: [
             {
+              name: '后台接口',
+              path: '/system/adminApi'
+            },
+            {
               name: '系统信息',
               path: '/system/index'
             },
@@ -84,10 +92,6 @@ export default {
             {
               name: '管理组',
               path: '/system/adminGroup'
-            },
-            {
-              name: '后台接口',
-              path: '/system/adminApi'
             }
           ]
         }

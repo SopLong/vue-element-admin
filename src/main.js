@@ -18,6 +18,9 @@ import FullCalendar from 'vue-fullcalendar';
 
 import moment from 'moment';// 导入文件
 
+import VueCookies from 'vue-cookies';
+Vue.use(VueCookies);
+
 Vue.prototype.$moment = moment;// 赋值使用
 Vue.use(FullCalendar);
 

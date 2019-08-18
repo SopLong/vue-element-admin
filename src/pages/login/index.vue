@@ -49,6 +49,7 @@ export default {
         this.$message.success('登录成功');
         window.localStorage.setItem('token', '15865526870');
         window.localStorage.setItem('user', '15865526870');
+        this.$cookies.set('token', '15868826870');
         setTimeout(f => {
           this.$router.push({path: '/'});
         }, 500);

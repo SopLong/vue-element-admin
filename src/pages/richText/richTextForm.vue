@@ -1,14 +1,16 @@
 <template>
   <div class="edit_container">
-        <quill-editor
-            v-model="content"
-            ref="myQuillEditor"
-            :options="editorOption"
-            @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
-            @change="onEditorChange($event)">
-        </quill-editor>
-        <el-button v-on:click="saveHtml">保存</el-button>
-    </div>
+    <quill-editor
+      v-model="content"
+      ref="myQuillEditor"
+      :options="editorOption"
+      @blur="onEditorBlur($event)"
+      @focus="onEditorFocus($event)"
+      @change="onEditorChange($event)"
+      style="height:500px"
+    >
+    </quill-editor>
+  </div>
 </template>
 
 <script>
@@ -16,7 +18,7 @@ export default {
   name: 'App',
   data() {
     return {
-      content: '<p>hello world</p>',
+      content: '<p>请输入内容...</p>',
       editorOption: {
         theme: 'snow'
       }
@@ -30,12 +32,11 @@ export default {
   methods: {
     onEditorReady(editor) { // 准备编辑器
     },
-    onEditorBlur() {}, // 失去焦点事件
-    onEditorFocus() {}, // 获得焦点事件
-    onEditorChange() {}, // 内容改变事件
-    saveHtml() {
-      alert(1111);
-      console.log(this.content);
+    onEditorBlur() { }, // 失去焦点事件
+    onEditorFocus() { }, // 获得焦点事件
+    onEditorChange() { }, // 内容改变事件
+    getContent() {
+      return this.content;
     }
   }
 };
@@ -43,7 +44,7 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

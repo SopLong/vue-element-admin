@@ -7,12 +7,20 @@ const routes = [
   {
     path: '/',
     name: '首页',
-    redirect: '/system/index',
+    redirect: '/system/adminApi',
     component: (resolve) => require(['../pages/base.vue'], resolve),
     children: [
       {
+        path: '/system/adminApi',
+        name: '主页',
+        component: (resolve) => require(['../pages/system/adminApi.vue'], resolve)
+      },
+      {
         path: '/system/index',
         name: '系统信息',
+        meta: {
+          noNeedLogin: true // 加上这个说明不需要登录，也可以访问该页面
+        },
         component: (resolve) => require(['../pages/system/index.vue'], resolve)
       },
       {
@@ -24,11 +32,6 @@ const routes = [
         path: '/system/adminGroup',
         name: '管理组',
         component: (resolve) => require(['../pages/system/adminGroup.vue'], resolve)
-      },
-      {
-        path: '/system/adminApi',
-        name: '后台接口',
-        component: (resolve) => require(['../pages/system/adminApi.vue'], resolve)
       },
       {
         path: '/article/index',
@@ -47,7 +50,7 @@ const routes = [
       },
       {
         path: '/article/add',
-        name: '添加文章',
+        name: '添加博客',
         component: (resolve) => require(['../pages/article/add.vue'], resolve)
       },
       {
@@ -65,7 +68,7 @@ const routes = [
     }
   },
   {
-    path: '*',
+    path: '/admin/*',
     redirect: '/'
   }
 ];
