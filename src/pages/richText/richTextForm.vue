@@ -7,7 +7,7 @@
       @blur="onEditorBlur($event)"
       @focus="onEditorFocus($event)"
       @change="onEditorChange($event)"
-      style="height:500px"
+      style="height:300px"
     >
     </quill-editor>
   </div>
@@ -37,6 +37,9 @@ export default {
     onEditorChange() { }, // 内容改变事件
     getContent() {
       return this.content;
+    },
+    resetContent() {
+      this.$set(this, 'content', '');
     }
   }
 };

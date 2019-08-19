@@ -8,8 +8,12 @@
         ref="form"
         :model="formData"
         label-width="80px"
+        :rules="rules"
       >
-        <el-form-item label="分类">
+        <el-form-item
+          label="分类"
+          prop="category"
+        >
           <el-select
             v-model="formData.category"
             filterable
@@ -24,20 +28,30 @@
               v-for="item in categoryList"
               :key="item.value"
               :label="item.name"
-              :value="item.value">
+              :value="item.value"
+            >
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="标题">
+        <el-form-item
+          label="标题"
+          prop="title"
+        >
           <el-input v-model="formData.title"></el-input>
         </el-form-item>
-        <el-form-item label="简介">
+        <el-form-item
+          label="简介"
+          prop="summary"
+        >
           <el-input
             type="text"
             v-model="formData.summary"
           ></el-input>
         </el-form-item>
-        <el-form-item label="是否置顶">
+        <el-form-item
+          label="是否置顶"
+          prop="isTop"
+        >
           <el-switch
             v-model="formData.isTop"
             active-color="green"
@@ -80,7 +94,12 @@ export default {
       },
       loading: false,
       categoryList: [],
-      saveLoading: false
+      saveLoading: false,
+      rules: {
+        category: [{ required: true, message: '请选择类别', trigger: 'change' }],
+        title: [{ required: true, message: '请输入标题', trigger: 'blur' }],
+        summary: [{ required: true, message: '请输入简介', trigger: 'blur' }]
+      }
     };
   },
 
@@ -91,12 +110,20 @@ export default {
   methods: {
     // 保存数据
     async onSave() {
-      // this.saveLoading = true;
-      const content = this.$refs.richText.getContent();
-      this.formData.content = content;
-      console.log(this.formData);
-      const res = await articleService.addBlogArticle(this.formData);
-      console.log(res);
+      this.$refs.form.validate(async(valid) => {
+        if (valid) {
+          const content = this.$refs.richText.getContent();
+          this.formData.content = content;
+          const res = await articleService.addBlogArticle(this.formData);
+          console.log(res);
+          if (res.code === 20000) {
+            this.$message.success('添加成功!');
+            this.$refs.form.resetFields();
+            this.$refs.richText.resetContent();
+            console.log(this.formData);
+          }
+        }
+      });
     },
     // 类别下拉列表获取远程数据
     async getCategoryList(type) {

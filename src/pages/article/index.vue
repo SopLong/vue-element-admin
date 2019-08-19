@@ -4,27 +4,21 @@
       <div class="ebox-content">
         <el-form ref="form" :model="searchForm">
           <el-form-item>
-            <el-col :span="3">
-              <el-input placeholder="关键字" v-model="searchForm.keyWords"></el-input>
+            <el-col :span="5">
+              <el-input placeholder="请输入标题，简介进行查询" v-model="searchForm.keyWords"></el-input>
             </el-col>
-            <el-col class="line" :span="1">&nbsp;</el-col>
-            <el-col :span="3">
+            <el-col :span="6">
               <el-button type="primary" @click="onSearch">搜索</el-button>
               <el-button type="primary" @click="onReset">重置</el-button>
+              <el-button type="primary" @click="onAdd">添加</el-button>
             </el-col>
           </el-form-item>
         </el-form>
       </div>
     </div>
     <div class="ebox">
-      <div class="ebox-title">
-        <h5>数据列表</h5>
-      </div>
       <div class="ebox-content">
-        <!-- <el-row>
-          <el-col :span="24"><el-button type="primary" @click="onAdd">添加</el-button></el-col>
-        </el-row> -->
-        <el-table :data="lists" border size="small" v-loading="listsLoading">
+        <el-table :data="lists" border size="small" v-loading="listsLoading" ref="table">
           <el-table-column prop="id" label="ID"></el-table-column>
           <!-- <el-table-column label="状态">
             <template slot-scope="scope">
@@ -40,7 +34,7 @@
           <el-table-column label="操作">
             <template slot-scope="scope">
               <el-button size="mini" type="primary" @click="onEdit(scope.row.article_id,2)" >编辑</el-button>
-              <el-button size="mini" type="danger" @click="onDelete(scope.row.article_id)">删除</el-button>
+              <el-button size="mini" type="danger" @click="onDelete(scope.row.id)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -113,19 +107,13 @@ export default {
 
     // 删除
     onDelete(id) {
-      this.$confirm('确认删除吗？').then(f => {
-        this.$request.post('/backend.article/delete', {
-          id: id
-        }, res => {
-          if (res.code) {
-            this.$message.success(res.msg);
-            this.lists = this.lists.filter(f => {
-              return f.article_id !== id;
-            });
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
+      console.log(this.$refs.table);
+      this.$confirm('确认删除吗？').then(async f => {
+        const res = await articleService.deleteArticle(id);
+        if (res.code === 20000) {
+          this.$message.success('删除成功!');
+        }
+        this.getPageResult(1);
       }).catch(f => {});
     }
   }

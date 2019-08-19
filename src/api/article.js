@@ -17,3 +17,11 @@ export function getArticleList(data) {
     data
   });
 }
+
+// 删除博客文章
+export function deleteArticle(id) {
+  return request({
+    url: '/article/deleteArticle/' + id,
+    method: 'get'
+  });
+}
