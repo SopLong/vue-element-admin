@@ -36,6 +36,12 @@ export default {
       group: null,
       menus: [
         {
+          index: 'home',
+          icon: 'el-icon-tickets',
+          name: '首页',
+          path: '/article/index'
+        },
+        {
           index: 'content',
           icon: 'el-icon-document',
           name: '内容管理',
@@ -79,7 +85,7 @@ export default {
           subMenus: [
             {
               name: '后台接口',
-              path: '/system/adminApi'
+              path: '/system/adminApi1'
             },
             {
               name: '系统信息',

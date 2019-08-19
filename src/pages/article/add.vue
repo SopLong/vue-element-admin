@@ -40,8 +40,8 @@
         <el-form-item label="是否置顶">
           <el-switch
             v-model="formData.isTop"
-            active-color="red"
-            inactive-color="blue"
+            active-color="green"
+            inactive-color="red"
             active-value=1
             inactive-value=0
             style="float:left;margin-top:5px;"
