@@ -8,3 +8,12 @@ export function addBlogArticle(data) {
     data
   });
 }
+
+// 获取博文列表
+export function getArticleList(data) {
+  return request({
+    url: '/article/getArticleList',
+    method: 'post',
+    data
+  });
+}

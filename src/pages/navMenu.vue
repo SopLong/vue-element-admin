@@ -47,7 +47,7 @@ export default {
           name: '内容管理',
           subMenus: [
             {
-              name: '文章列表',
+              name: '博文列表',
               path: '/article/index'
             },
             {

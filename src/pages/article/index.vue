@@ -5,11 +5,7 @@
         <el-form ref="form" :model="searchForm">
           <el-form-item>
             <el-col :span="3">
-              <el-input placeholder="文章ID" v-model="searchForm.article_id"></el-input>
-            </el-col>
-            <el-col class="line" :span="1">&nbsp;</el-col>
-            <el-col :span="3">
-              <el-input placeholder="标题" v-model="searchForm.title"></el-input>
+              <el-input placeholder="关键字" v-model="searchForm.keyWords"></el-input>
             </el-col>
             <el-col class="line" :span="1">&nbsp;</el-col>
             <el-col :span="3">
@@ -25,23 +21,22 @@
         <h5>数据列表</h5>
       </div>
       <div class="ebox-content">
-        <el-row>
+        <!-- <el-row>
           <el-col :span="24"><el-button type="primary" @click="onAdd">添加</el-button></el-col>
-        </el-row>
+        </el-row> -->
         <el-table :data="lists" border size="small" v-loading="listsLoading">
-          <el-table-column prop="article_id" label="ID"></el-table-column>
-          <el-table-column prop="title" label="标题"></el-table-column>
-          <el-table-column label="状态">
+          <el-table-column prop="id" label="ID"></el-table-column>
+          <!-- <el-table-column label="状态">
             <template slot-scope="scope">
               <span v-if="scope.row.status == 1" class="text-green">显示</span>
               <span v-if="scope.row.status == 2" class="text-red">隐藏</span>
               <span v-if="scope.row.status == 3" class="text-gray">回收站</span>
             </template>
-          </el-table-column>
-          <el-table-column prop="author" label="作者"></el-table-column>
-          <el-table-column prop="tags" label="标签"></el-table-column>
-          <el-table-column prop="create_time" label="创建时间"></el-table-column>
-          <el-table-column prop="update_time" label="更新时间"></el-table-column>
+          </el-table-column> -->
+          <el-table-column prop="title" label="标题"></el-table-column>
+          <el-table-column prop="summary" label="简介"></el-table-column>
+          <el-table-column prop="isTop" label="是否置顶"></el-table-column>
+          <el-table-column prop="createtime" label="创建时间"></el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
               <el-button size="mini" type="primary" @click="onEdit(scope.row.article_id,2)" >编辑</el-button>
@@ -57,7 +52,11 @@
   </div>
 </template>
 <script>
+import * as articleService from '@/api/article';
 export default {
+  components: {
+    articleService
+  },
   data() {
     return {
       listsLoading: false,
@@ -76,22 +75,20 @@ export default {
   methods: {
 
     // 获取数据列表
-    getPageResult(page) {
+    async getPageResult(page) {
       this.listsLoading = true;
       let pageParams = {
         page: page,
         size: this.size
       };
       let params = Object.assign(pageParams, this.searchForm);
-      this.$request.post('/backend.article/lists', params, res => {
-        if (res.code) {
-          this.lists = res.data.lists;
-          this.total = res.data.total;
-        } else {
-          this.$message.error(res.msg);
-        }
-        this.listsLoading = false;
-      });
+      const res = await articleService.getArticleList(params);
+      if (res.code === 20000) {
+        this.$set(this, 'lists', res.data.records);
+
+        this.$set(this, 'total', res.data.total);
+      }
+      this.listsLoading = false;
     },
 
     // 搜索

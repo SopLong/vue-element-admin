@@ -35,7 +35,7 @@ const routes = [
       },
       {
         path: '/article/index',
-        name: '文章列表',
+        name: '博文列表',
         component: (resolve) => require(['../pages/article/index.vue'], resolve)
       },
       {
