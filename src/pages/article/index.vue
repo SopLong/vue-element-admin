@@ -4,10 +4,11 @@
       <div class="ebox-content">
         <el-form ref="form" :model="searchForm">
           <el-form-item>
-            <el-col :span="5">
+            <el-col :span="4">
               <el-input placeholder="请输入标题，简介进行查询" v-model="searchForm.keyWords"></el-input>
             </el-col>
-            <el-col :span="6">
+            <el-col :span="0.5">&nbsp;</el-col>
+            <el-col :span="4">
               <el-button type="primary" @click="onSearch">搜索</el-button>
               <el-button type="primary" @click="onReset">重置</el-button>
               <el-button type="primary" @click="onAdd">添加</el-button>
